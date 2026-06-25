@@ -75,7 +75,8 @@ export async function POST(request: Request) {
     };
     return NextResponse.json({ success: true, data } satisfies ApiResponse<EpisodeListItem>, { status: 201 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "创建剧集失败" } satisfies ApiResponse<null>, { status: 500 });
+    console.error("Episode create error:", error);
+    const message = error instanceof Error ? error.message : "创建剧集失败";
+    return NextResponse.json({ success: false, error: message } satisfies ApiResponse<null>, { status: 500 });
   }
 }

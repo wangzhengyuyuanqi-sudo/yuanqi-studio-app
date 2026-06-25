@@ -81,7 +81,8 @@ export async function POST(request: Request, { params }: { params: { id: string 
     };
     return NextResponse.json({ success: true, data } satisfies ApiResponse<AssetItem>, { status: 201 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "上传失败" } satisfies ApiResponse<null>, { status: 500 });
+    console.error("Asset upload error:", error);
+    const message = error instanceof Error ? error.message : "上传失败";
+    return NextResponse.json({ success: false, error: message } satisfies ApiResponse<null>, { status: 500 });
   }
 }

@@ -67,8 +67,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     };
     return NextResponse.json({ success: true, data } satisfies ApiResponse<AssetItem>);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: "更新失败" } satisfies ApiResponse<null>, { status: 500 });
+    console.error("Asset update error:", error);
+    const message = error instanceof Error ? error.message : "更新失败";
+    return NextResponse.json({ success: false, error: message } satisfies ApiResponse<null>, { status: 500 });
   }
 }
 
