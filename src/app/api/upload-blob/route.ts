@@ -1,12 +1,12 @@
 import { handleUpload } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-
     const jsonResponse = await handleUpload({
-      body,
+      body: await request.json(),
       request,
       onBeforeGenerateToken: async () => {
         return {
@@ -24,8 +24,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
-    console.error("Blob upload error:", error);
-    const message = error instanceof Error ? error.message : "文件上传失败";
-    return NextResponse.json({ success: false, error: message }, { status: 500 });
+    console.error("upload-blob error:", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "上传服务异常" },
+      { status: 500 }
+    );
   }
 }

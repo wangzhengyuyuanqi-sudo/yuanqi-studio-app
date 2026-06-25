@@ -12,22 +12,18 @@ interface AssetUploadFormProps {
   title: string;
 }
 
-async function uploadFileToBlob(file: File): Promise<{ url: string; name: string }> {
+async function uploadFile(file: File): Promise<{ url: string; name: string }> {
   const { upload } = await import("@vercel/blob/client");
-  const blob = await upload(file.name, file, {
-    access: "public",
-    handleUploadUrl: "/api/upload-blob",
-  });
-  return { url: blob.url, name: file.name };
-}
-
-async function uploadFileFallback(file: File): Promise<{ url: string; name: string }> {
-  const fd = new FormData();
-  fd.append("file", file);
-  const res = await fetch("/api/upload-fallback", { method: "POST", body: fd });
-  const data = await res.json();
-  if (!data.success) throw new Error(data.error || "上传失败");
-  return { url: data.url, name: data.name };
+  try {
+    const blob = await upload(file.name, file, {
+      access: "public",
+      handleUploadUrl: "/api/upload-blob",
+    });
+    return { url: blob.url, name: file.name };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "上传失败";
+    throw new Error(msg.replace(/^Failed to fetch|Unexpected token|is not valid JSON/g, "上传服务繁忙，请稍后重试"));
+  }
 }
 
 export default function AssetUploadForm({ initialType, initialData, onSubmit, onCancel, title }: AssetUploadFormProps) {
@@ -58,20 +54,13 @@ export default function AssetUploadForm({ initialType, initialData, onSubmit, on
 
     if (file) {
       try {
-        const uploaded = await uploadFileToBlob(file);
+        const uploaded = await uploadFile(file);
         fd.append(isScript ? "blobScriptUrl" : "blobImageUrl", uploaded.url);
         fd.append(isScript ? "blobScriptName" : "blobImageName", uploaded.name);
-      } catch (blobErr) {
-        console.warn("Blob client upload failed, falling back:", blobErr);
-        try {
-          const uploaded = await uploadFileFallback(file);
-          fd.append(isScript ? "blobScriptUrl" : "blobImageUrl", uploaded.url);
-          fd.append(isScript ? "blobScriptName" : "blobImageName", uploaded.name);
-        } catch (fallbackErr) {
-          setError(fallbackErr instanceof Error ? fallbackErr.message : "文件上传失败");
-          setLoading(false);
-          return;
-        }
+      } catch (uploadErr) {
+        setError(uploadErr instanceof Error ? uploadErr.message : "文件上传失败，请重试");
+        setLoading(false);
+        return;
       }
     }
 
