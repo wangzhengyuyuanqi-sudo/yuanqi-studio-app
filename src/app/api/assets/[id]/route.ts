@@ -56,6 +56,14 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     if (fd.get("removeFile") === "true") {
       if (existing.imagePath) await deleteFile(existing.imagePath);
       imagePath = null; imageName = null;
+    } else {
+      const blobUrl = fd.get(isScript ? "blobScriptUrl" : "blobImageUrl") as string | null;
+      const blobName = fd.get(isScript ? "blobScriptName" : "blobImageName") as string | null;
+      if (blobUrl) {
+        if (existing.imagePath) await deleteFile(existing.imagePath);
+        imagePath = blobUrl;
+        imageName = blobName || null;
+      }
     }
 
     const updated = await prisma.asset.update({ where: { id: params.id }, data: { ...v.data, imagePath, imageName } });

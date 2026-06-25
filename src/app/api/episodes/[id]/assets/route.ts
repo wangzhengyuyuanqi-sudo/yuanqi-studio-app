@@ -73,6 +73,19 @@ export async function POST(request: Request, { params }: { params: { id: string 
       return NextResponse.json({ success: true, data } satisfies ApiResponse<AssetItem>, { status: 201 });
     }
 
+    const blobUrl = fd.get(isScript ? "blobScriptUrl" : "blobImageUrl") as string | null;
+    const blobName = fd.get(isScript ? "blobScriptName" : "blobImageName") as string | null;
+    if (blobUrl) {
+      const updated = await prisma.asset.update({ where: { id: asset.id }, data: { imagePath: blobUrl, imageName: blobName || null } });
+      const data: AssetItem = {
+        id: updated.id, name: updated.name, description: updated.description,
+        type: updated.type as AssetItem["type"], imagePath: updated.imagePath, imageName: updated.imageName,
+        tags: updated.tags, episodeId: updated.episodeId,
+        createdAt: updated.createdAt.toISOString(), updatedAt: updated.updatedAt.toISOString(),
+      };
+      return NextResponse.json({ success: true, data } satisfies ApiResponse<AssetItem>, { status: 201 });
+    }
+
     const data: AssetItem = {
       id: asset.id, name: asset.name, description: asset.description,
       type: asset.type as AssetItem["type"], imagePath: asset.imagePath, imageName: asset.imageName,
