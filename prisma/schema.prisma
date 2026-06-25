@@ -1,0 +1,46 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Drama {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  episodes    Episode[]
+}
+
+model Episode {
+  id            String    @id @default(cuid())
+  episodeNumber Int
+  title         String
+  summary       String?
+  scriptPath    String?
+  scriptName    String?
+  dramaId       String?
+  drama         Drama?    @relation(fields: [dramaId], references: [id], onDelete: SetNull)
+  assets        Asset[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Asset {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        String
+  imagePath   String?
+  imageName   String?
+  tags        String?
+  episodeId   String
+  episode     Episode  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
