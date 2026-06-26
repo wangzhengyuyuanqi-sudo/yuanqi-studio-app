@@ -12,31 +12,31 @@ export default function EpisodeListRow({ episode, isEdit, onDelete }: EpisodeLis
   return (
     <Link
       href={`/episodes/${episode.id}`}
-      className="flex items-center gap-5 px-5 py-4 bg-white/[0.02] border border-white/[0.05] rounded-xl hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-300 group"
+      className="flex items-center gap-5 px-6 py-5 neumorph-raised rounded-2xl transition-all duration-500 group"
     >
-      <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-noir-400 font-mono text-xs shrink-0 group-hover:bg-gold-500/10 group-hover:text-gold-400 group-hover:border-gold-500/20 transition-all duration-300">
+      <div className="w-12 h-12 rounded-2xl neumorph-inset flex items-center justify-center text-champagne-300/70 font-mono text-sm font-bold shrink-0 group-hover:text-gold-400 group-hover:shadow-gold-sm transition-all duration-500">
         {episode.episodeNumber}
       </div>
 
       <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-medium text-noir-200 group-hover:text-noir-50 transition-colors duration-200">
+        <h3 className="text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">
           {episode.title}
         </h3>
         {episode.summary && (
-          <p className="text-xs text-noir-500 line-clamp-1 mt-1 group-hover:text-noir-400 transition-colors">
+          <p className="text-sm text-noir-500 line-clamp-1 mt-1.5 group-hover:text-noir-400 transition-colors">
             {episode.summary}
           </p>
         )}
       </div>
 
       <div className="flex items-center gap-4 shrink-0">
-        <span className="text-xs text-noir-600 font-mono tabular-nums">{episode._count.assets} 个资产</span>
+        <span className="text-sm text-noir-500 font-mono tabular-nums">{episode._count.assets} 个资产</span>
         {episode.scriptName && (
-          <span className="text-xs text-gold-400/40 font-mono">剧本</span>
+          <span className="text-xs text-gold-500/40 font-mono">剧本</span>
         )}
 
         {isEdit && onDelete && (
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" onClick={(e) => e.preventDefault()}>
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" onClick={(e) => e.preventDefault()}>
             <Button
               variant="danger"
               size="sm"

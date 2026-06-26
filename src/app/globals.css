@@ -2,82 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Noise Texture Overlay ===== */
+/* ===== Noise Texture ===== */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ===== Scrollbar ===== */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.15); border-radius: 20px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.3); }
 
 /* ===== Selection ===== */
-::selection {
-  background: rgba(245, 166, 35, 0.25);
-  color: #f5a623;
-}
+::selection { background: rgba(212, 175, 55, 0.3); color: #f0e6c8; }
 
 /* ===== Focus ===== */
-*:focus-visible {
-  outline: 2px solid rgba(245, 166, 35, 0.5);
-  outline-offset: 2px;
-  border-radius: 2px;
+*:focus-visible { outline: 2px solid rgba(212, 175, 55, 0.6); outline-offset: 3px; border-radius: 4px; }
+
+/* ===== Base ===== */
+html { font-size: 17px; }
+@media (max-width: 640px) { html { font-size: 15px; } }
+
+/* ===== Cinematic Animations ===== */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ambient-glow {
+  0%, 100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.06), 0 0 60px rgba(212, 175, 55, 0.03); }
+  50%      { box-shadow: 0 0 45px rgba(212, 175, 55, 0.12), 0 0 80px rgba(212, 175, 55, 0.06); }
+}
+@keyframes neumorph-press {
+  0%   { transform: translateY(0) scale(1); }
+  40%  { transform: translateY(2px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes golden-shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
 }
 
-/* ===== Animations ===== */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0);   }
+.animate-reveal-up  { animation: reveal-up  0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-reveal-fade { animation: reveal-fade 0.45s ease-out both; }
+.animate-slide-right { animation: slide-in-right 0.35s ease-out both; }
+.animate-ambient    { animation: ambient-glow 4s ease-in-out infinite; }
+.animate-float      { animation: float 3s ease-in-out infinite; }
+.animate-press      { animation: neumorph-press 0.3s ease-out; }
+
+.stagger-1 { animation-delay: 0.04s; }  .stagger-2 { animation-delay: 0.08s; }
+.stagger-3 { animation-delay: 0.12s; }  .stagger-4 { animation-delay: 0.16s; }
+.stagger-5 { animation-delay: 0.2s; }   .stagger-6 { animation-delay: 0.24s; }
+.stagger-7 { animation-delay: 0.28s; }  .stagger-8 { animation-delay: 0.32s; }
+
+/* ===== Neumorphic Utilities ===== */
+.neumorph-raised {
+  background: linear-gradient(145deg, #1e1e2e, #14141c);
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5),
+              -5px -5px 12px rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.06);
 }
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0);    }
+.neumorph-raised:hover {
+  box-shadow: 7px 7px 16px rgba(0, 0, 0, 0.55),
+              -5px -5px 14px rgba(255, 255, 255, 0.04);
 }
-@keyframes card-in {
-  from { opacity: 0; transform: translateY(10px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1);       }
+.neumorph-inset {
+  background: linear-gradient(145deg, #12121a, #1a1a26);
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.45),
+              inset -3px -3px 8px rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.05);
 }
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1);     }
+.neumorph-gold-raised {
+  background: linear-gradient(145deg, #d4a028, #b8860b);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5),
+              -3px -3px 10px rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.2);
 }
-@keyframes shimmer {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(100%);   }
-}
-@keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.1); }
-  50%      { box-shadow: 0 0 0 4px rgba(245, 166, 35, 0);   }
+.neumorph-gold-raised:active {
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.4),
+              inset -2px -2px 6px rgba(212, 175, 55, 0.15);
+  transform: translateY(2px);
 }
 
-.animate-fade-in  { animation: fade-in  0.4s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
-.animate-slide-up { animation: slide-up 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
-.animate-card-in  { animation: card-in  0.4s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
-.animate-scale-in { animation: scale-in 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
-
-.stagger-1 { animation-delay: 0.03s; }
-.stagger-2 { animation-delay: 0.06s; }
-.stagger-3 { animation-delay: 0.09s; }
-.stagger-4 { animation-delay: 0.12s; }
-.stagger-5 { animation-delay: 0.15s; }
-.stagger-6 { animation-delay: 0.18s; }
-.stagger-7 { animation-delay: 0.21s; }
-.stagger-8 { animation-delay: 0.24s; }
+/* ===== Golden shimmer line ===== */
+.golden-line {
+  position: relative;
+}
+.golden-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}

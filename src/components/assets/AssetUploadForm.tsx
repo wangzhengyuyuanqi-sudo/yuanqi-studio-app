@@ -76,7 +76,7 @@ export default function AssetUploadForm({ initialType, initialData, onSubmit, on
   const isScript = type === "SCRIPT";
   const accept = isScript ? ".pdf,.docx,.doc,.txt" : "image/jpeg,image/png,image/webp,image/gif";
 
-  const inputClass = "w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-sm text-noir-200 placeholder:text-noir-600 focus:outline-none focus:border-gold-500/40 focus:ring-1 focus:ring-gold-500/20 transition-all duration-200";
+  const inputClass = "w-full neumorph-inset rounded-2xl px-5 py-3.5 text-sm text-champagne-300/90 placeholder:text-noir-600 focus:outline-none focus:shadow-gold-sm transition-all duration-300";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -121,7 +121,7 @@ export default function AssetUploadForm({ initialType, initialData, onSubmit, on
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="text-sm text-red-400 bg-red-500/8 border border-red-500/15 px-3.5 py-2.5 rounded-xl">
+        <div className="text-sm text-red-400 bg-red-500/8 border border-red-500/15 px-4 py-3 rounded-2xl">
           {error}
         </div>
       )}
@@ -146,7 +146,7 @@ export default function AssetUploadForm({ initialType, initialData, onSubmit, on
       )}
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">资产类型</label>
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">资产类型</label>
         <select value={type} onChange={(e) => setType(e.target.value)} className={inputClass}>
           {ASSET_TYPES.map((t) => (
             <option key={t} value={t} className="bg-[#101018]">{ASSET_TYPE_LABELS[t]}</option>
@@ -155,22 +155,22 @@ export default function AssetUploadForm({ initialType, initialData, onSubmit, on
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">名称</label>
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">名称</label>
         <input value={name} onChange={(e) => setName(e.target.value)} className={inputClass} placeholder="资产名称" />
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">描述</label>
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">描述</label>
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="可选" />
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">标签（逗号分隔）</label>
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">标签（逗号分隔）</label>
         <input value={tags} onChange={(e) => setTags(e.target.value)} className={inputClass} placeholder="如: 主角, 日景" />
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">
           {isScript ? "上传剧本" : "上传图片"}
         </label>
         <input type="file" accept={accept} onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full text-sm text-noir-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-medium file:bg-white/[0.04] file:text-noir-300 hover:file:bg-white/[0.08] file:transition-colors file:cursor-pointer" />

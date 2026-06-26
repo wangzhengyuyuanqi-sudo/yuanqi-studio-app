@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 
-const inputClass = "w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-sm text-noir-200 placeholder:text-noir-600 focus:outline-none focus:border-gold-500/40 focus:ring-1 focus:ring-gold-500/20 transition-all duration-200";
+const inputClasses = "w-full neumorph-inset rounded-2xl px-5 py-3.5 text-sm text-champagne-300/90 placeholder:text-noir-600 focus:outline-none focus:shadow-gold-sm transition-all duration-300";
 
 interface DramaFormProps {
   initialData?: { title: string; description: string };
@@ -33,24 +33,24 @@ export default function DramaForm({ initialData, onSubmit, onCancel }: DramaForm
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       {error && (
-        <div className="text-sm text-red-400 bg-red-500/8 border border-red-500/15 px-3.5 py-2.5 rounded-xl">
+        <div className="text-sm text-red-400 bg-red-500/8 border border-red-500/15 px-4 py-3 rounded-2xl">
           {error}
         </div>
       )}
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">剧集名称</label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputClass} placeholder="如：第一季" />
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">剧集名称</label>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputClasses} placeholder="如：第一季" />
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-noir-400 mb-1.5">描述</label>
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="可选" />
+        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">描述</label>
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className={`${inputClasses} resize-none`} placeholder="可选" />
       </div>
 
-      <div className="flex gap-3 pt-2">
+      <div className="flex gap-3 pt-3">
         <Button type="submit" disabled={loading}>
           {loading ? "提交中..." : "提交"}
         </Button>

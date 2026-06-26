@@ -47,22 +47,22 @@ export default function DramaListPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-6 py-8">
-        <div className="flex items-end justify-between mb-10 animate-fade-in">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-8 py-10">
+        <div className="flex items-end justify-between mb-10 animate-reveal-up">
           <div>
             <Link
               href="/dashboard"
-              className="text-xs text-noir-500 hover:text-noir-300 transition-colors duration-200 mb-2 inline-block"
+              className="text-2xs text-noir-500 hover:text-champagne-300 transition-colors duration-300 mb-2 inline-block"
             >
               ← 返回剧集目录
             </Link>
-            <h1 className="text-2xl font-bold text-noir-50 mt-1">剧集列表</h1>
+            <h1 className="text-3xl font-extrabold text-champagne-300 tracking-tight mt-1">剧集列表</h1>
           </div>
           <div className="flex items-center gap-3">
             {dramaList.length > 0 && (
-              <Button variant="secondary" size="sm" onClick={handleExport} disabled={exporting}>
+              <Button variant="ghost" size="sm" onClick={handleExport} disabled={exporting}>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                {exporting ? "导出中..." : "导出 Excel"}
+                {exporting ? "导出中..." : "导出"}
               </Button>
             )}
             {isEdit && (
@@ -74,33 +74,33 @@ export default function DramaListPage() {
         </div>
 
         {dramaList.length === 0 ? (
-          <p className="text-noir-500 text-sm text-center py-24 animate-fade-in">暂无剧集</p>
+          <p className="text-noir-500 text-base text-center py-28 animate-reveal-up">暂无剧集</p>
         ) : (
-          <div className="space-y-1.5">
+          <div className="space-y-3">
             {dramaList.map((d, i) => (
               <div
                 key={d.id}
-                className="flex items-center gap-5 px-5 py-4 bg-white/[0.02] border border-white/[0.05] rounded-xl hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-300 group animate-card-in"
+                className="flex items-center gap-5 px-6 py-5 neumorph-raised rounded-2xl transition-all duration-500 group animate-reveal-up"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-500/60 group-hover:bg-gold-400 group-hover:shadow-[0_0_8px_rgba(245,166,35,0.4)] transition-all duration-300 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-gold-500/70 group-hover:bg-gold-400 group-hover:shadow-gold-sm transition-all duration-500 shrink-0" />
                 <Link href={`/dramas/${d.id}`} className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium text-noir-200 group-hover:text-noir-50 transition-colors duration-200">
+                  <h3 className="text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">
                     {d.title}
                   </h3>
                   {d.description && (
-                    <p className="text-xs text-noir-500 line-clamp-1 mt-1 group-hover:text-noir-400 transition-colors">
+                    <p className="text-sm text-noir-500 line-clamp-1 mt-1.5 group-hover:text-noir-400 transition-colors">
                       {d.description}
                     </p>
                   )}
                 </Link>
-                <span className="text-xs text-noir-600 shrink-0 font-mono tabular-nums">
+                <span className="text-sm text-noir-500 shrink-0 font-mono tabular-nums">
                   {d._count.episodes} 集
                 </span>
                 {isEdit && (
                   <button
                     onClick={() => handleDelete(d.id)}
-                    className="opacity-0 group-hover:opacity-100 text-xs text-red-400/60 hover:text-red-400 transition-all duration-200 shrink-0"
+                    className="opacity-0 group-hover:opacity-100 text-xs text-red-400/60 hover:text-red-400 transition-all duration-300 shrink-0"
                   >
                     删除
                   </button>

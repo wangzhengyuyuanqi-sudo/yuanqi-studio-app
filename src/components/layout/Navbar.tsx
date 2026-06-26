@@ -4,17 +4,18 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="h-14 border-b border-white/[0.06] bg-[#08080c]/80 backdrop-blur-xl flex items-center justify-between px-6 shrink-0 sticky top-0 z-40">
+    <nav className="h-16 border-b border-gold-500/8 bg-[#08080c]/85 backdrop-blur-2xl flex items-center justify-between px-8 shrink-0 sticky top-0 z-40">
       <Link
         href="/"
-        className="text-noir-100 font-bold text-lg tracking-tight hover:text-gold-400 transition-colors duration-300"
+        className="text-champagne-300 font-extrabold text-xl tracking-tighter hover:text-gold-400 transition-all duration-500 flex items-center gap-2.5"
       >
+        <span className="w-2 h-2 rounded-full bg-gold-500 shadow-gold-sm animate-pulse" />
         元气制片
       </Link>
 
       <Link
         href="/"
-        className="text-xs text-noir-500 hover:text-noir-300 transition-colors duration-200"
+        className="text-xs text-noir-400 hover:text-champagne-300 transition-all duration-300 px-3 py-1.5 rounded-lg hover:bg-[#1e1e2e]/50"
       >
         退出
       </Link>

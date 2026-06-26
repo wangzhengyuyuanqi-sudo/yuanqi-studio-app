@@ -56,8 +56,8 @@ export default function DramaDetailPage() {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <div className="flex items-center justify-center flex-1 flex-col gap-4">
-          <p className="text-red-400 text-sm">剧集不存在</p>
+        <div className="flex items-center justify-center flex-1 flex-col gap-5">
+          <p className="text-red-400 text-base">剧集不存在</p>
           <Link href="/dramas" className="text-gold-400 hover:text-gold-300 text-sm transition-colors">返回剧集列表</Link>
         </div>
       </div>
@@ -67,41 +67,41 @@ export default function DramaDetailPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-6 py-8">
-        <div className="animate-fade-in">
-          <Link href="/dramas" className="text-xs text-noir-500 hover:text-noir-300 transition-colors duration-200">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-8 py-10">
+        <div className="animate-reveal-up">
+          <Link href="/dramas" className="text-2xs text-noir-500 hover:text-champagne-300 transition-colors duration-300">
             ← 返回剧集列表
           </Link>
         </div>
 
         {!loaded ? (
-          <div className="flex items-center justify-center py-24">
-            <div className="w-5 h-5 border-2 border-gold-500/30 border-t-gold-500 rounded-full animate-spin" />
+          <div className="flex items-center justify-center py-28">
+            <div className="w-6 h-6 border-[3px] border-gold-500/20 border-t-gold-500 rounded-full animate-spin" />
           </div>
         ) : drama ? (
           <>
-            <div className="mb-10 mt-4 animate-slide-up">
+            <div className="mb-10 mt-4 animate-reveal-up stagger-1">
               <div className="flex items-end justify-between">
                 <div>
-                  <p className="text-noir-500 text-xs tracking-[0.15em] uppercase mb-2">Drama</p>
-                  <h1 className="text-2xl font-bold text-noir-50">{drama.title}</h1>
+                  <p className="text-noir-500 text-2xs tracking-[0.18em] uppercase mb-2">Drama</p>
+                  <h1 className="text-3xl font-extrabold text-champagne-300 tracking-tight">{drama.title}</h1>
                   {drama.description && (
-                    <p className="text-noir-400 text-sm mt-2 max-w-lg">{drama.description}</p>
+                    <p className="text-noir-400 text-base mt-3 max-w-lg leading-relaxed">{drama.description}</p>
                   )}
                 </div>
-                <span className="text-noir-600 text-sm font-mono tabular-nums">
+                <span className="text-noir-500 text-base font-mono tabular-nums">
                   {drama._count.episodes} 集
                 </span>
               </div>
             </div>
 
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-noir-300 font-medium text-sm">集数列表</h2>
+              <h2 className="text-champagne-300/80 font-bold text-base tracking-wide">集数列表</h2>
               <div className="flex items-center gap-3">
                 {drama.episodes.length > 0 && (
-                  <Button variant="secondary" size="sm" onClick={handleExport} disabled={exporting}>
+                  <Button variant="ghost" size="sm" onClick={handleExport} disabled={exporting}>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                    {exporting ? "导出中..." : "导出 Excel"}
+                    {exporting ? "导出中..." : "导出"}
                   </Button>
                 )}
                 {isEdit && (
@@ -113,18 +113,18 @@ export default function DramaDetailPage() {
             </div>
 
             {drama.episodes.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
-                <div className="w-12 h-12 rounded-xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-center mb-3">
-                  <svg className="w-5 h-5 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              <div className="flex flex-col items-center justify-center py-24 animate-reveal-up">
+                <div className="w-16 h-16 rounded-2xl neumorph-inset flex items-center justify-center mb-4">
+                  <svg className="w-6 h-6 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </div>
-                <p className="text-noir-500 text-sm">{isEdit ? "添加第一集" : "暂无集数"}</p>
+                <p className="text-noir-500 text-base">{isEdit ? "添加第一集" : "暂无集数"}</p>
               </div>
             ) : (
-              <div className="space-y-1.5">
+              <div className="space-y-3">
                 {drama.episodes.map((ep, i) => (
-                  <div key={ep.id} className="animate-card-in" style={{ animationDelay: `${i * 50}ms` }}>
+                  <div key={ep.id} className="animate-reveal-up" style={{ animationDelay: `${i * 50}ms` }}>
                     <EpisodeListRow episode={ep} isEdit={isEdit} onDelete={handleDeleteEpisode} />
                   </div>
                 ))}

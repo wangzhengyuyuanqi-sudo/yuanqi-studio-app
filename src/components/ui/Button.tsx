@@ -2,24 +2,25 @@ import type { ReactNode, ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger" | "ghost";
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   children: ReactNode;
 }
 
 const variants = {
   primary:
-    "bg-gold-500 text-[#08080c] hover:bg-gold-400 shadow-[0_0_20px_rgba(245,166,35,0.12)] hover:shadow-[0_0_28px_rgba(245,166,35,0.18)]",
+    "neumorph-gold-raised text-[#0c0b08] font-bold tracking-wide active:scale-[0.97] transition-all duration-200",
   secondary:
-    "bg-white/[0.04] text-noir-300 border border-white/[0.08] hover:border-white/[0.14] hover:text-noir-100 hover:bg-white/[0.06]",
+    "neumorph-raised text-champagne-300 border-gold-500/10 hover:shadow-gold-sm hover:border-gold-500/20 active:scale-[0.97] transition-all duration-300",
   danger:
-    "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20",
+    "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 active:scale-[0.97]",
   ghost:
-    "text-noir-500 hover:text-noir-200 hover:bg-white/[0.04]",
+    "text-noir-400 hover:text-champagne-300 hover:bg-[#1e1e2e]/60 active:scale-[0.97]",
 };
 
 const sizes = {
-  sm: "px-3 py-1.5 text-xs rounded-lg",
-  md: "px-4 py-2 text-sm rounded-xl",
+  sm: "px-4 py-2 text-xs rounded-xl",
+  md: "px-6 py-3 text-sm rounded-2xl",
+  lg: "px-8 py-4 text-base rounded-2xl",
 };
 
 export default function Button({
@@ -31,7 +32,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 font-semibold disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}
