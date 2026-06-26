@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', '"PingFang SC"', '"Microsoft YaHei"', 'serif'],
+        display: ['"Cormorant Garamond"', '"Noto Serif SC"', '"PingFang SC"', 'serif'],
         body: ['"Noto Serif SC"', '"PingFang SC"', '"Microsoft YaHei"', 'serif'],
         mono: ['"SF Mono"', '"JetBrains Mono"', 'Menlo', 'monospace'],
         script: ['"Dancing Script"', 'cursive'],
-        heading: ['"Playfair Display"', '"Noto Serif SC"', '"PingFang SC"', 'serif'],
+        heading: ['"Cormorant Garamond"', '"Noto Serif SC"', '"PingFang SC"', 'serif'],
       },
       colors: {
         noir: {
