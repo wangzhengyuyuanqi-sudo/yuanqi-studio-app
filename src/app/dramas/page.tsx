@@ -47,17 +47,17 @@ export default function DramaListPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-8 py-6 sm:py-10">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-0 mb-6 sm:mb-10 animate-reveal-up">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-5 sm:px-8 py-8 sm:py-12 relative z-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-0 mb-8 sm:mb-12 animate-reveal-up">
           <div>
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 text-sm text-noir-400 hover:text-champagne-300 transition-colors duration-300 mb-3 px-3 py-1.5 -ml-3 rounded-lg hover:bg-[#1e1e2e]/40 font-medium"
+              className="inline-flex items-center gap-2 text-sm text-noir-400 hover:text-champagne-300/70 transition-colors duration-300 mb-3 px-3 py-1.5 -ml-3 rounded-lg hover:bg-white/[0.03] font-medium"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
               返回剧集目录
             </Link>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-champagne-300 tracking-tight mt-1">剧集列表</h1>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-champagne-300/90 tracking-tight mt-1">剧集列表</h1>
           </div>
           <div className="flex items-center gap-3">
             {dramaList.length > 0 && (
@@ -75,33 +75,33 @@ export default function DramaListPage() {
         </div>
 
         {dramaList.length === 0 ? (
-          <p className="text-noir-500 text-base text-center py-28 animate-reveal-up">暂无剧集</p>
+          <p className="text-noir-500/80 text-base text-center py-32 animate-reveal-up">暂无剧集</p>
         ) : (
           <div className="space-y-3">
             {dramaList.map((d, i) => (
               <div
                 key={d.id}
-                className="flex items-center gap-4 sm:gap-5 px-4 sm:px-6 py-4 sm:py-5 neumorph-raised rounded-2xl transition-all duration-500 group animate-reveal-up"
+                className="flex items-center gap-4 sm:gap-5 px-5 sm:px-6 py-4 sm:py-5 neumorph-raised rounded-2xl group animate-reveal-up"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                <div className="w-2 h-2 rounded-full bg-gold-500/70 group-hover:bg-gold-400 group-hover:shadow-gold-sm transition-all duration-500 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-gold-500/70 group-hover:bg-gold-400 group-hover:shadow-[0_0_12px_rgba(212,160,32,0.5)] transition-all duration-500 shrink-0" />
                 <Link href={`/dramas/${d.id}`} className="flex-1 min-w-0">
-                  <h3 className="text-sm sm:text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">
+                  <h3 className="text-base font-bold text-champagne-300/80 group-hover:text-champagne-300 transition-colors duration-300">
                     {d.title}
                   </h3>
                   {d.description && (
-                    <p className="text-xs sm:text-sm text-noir-500 line-clamp-1 mt-1.5 group-hover:text-noir-400 transition-colors">
+                    <p className="text-sm text-noir-500 line-clamp-1 mt-1.5 group-hover:text-noir-400 transition-colors">
                       {d.description}
                     </p>
                   )}
                 </Link>
-                <span className="text-xs sm:text-sm text-noir-500 shrink-0 font-mono tabular-nums">
+                <span className="text-sm text-noir-500 shrink-0 font-mono tabular-nums">
                   {d._count.episodes} 集
                 </span>
                 {isEdit && (
                   <button
                     onClick={() => handleDelete(d.id)}
-                    className="opacity-0 group-hover:opacity-100 text-xs text-red-400/60 hover:text-red-400 transition-all duration-300 shrink-0"
+                    className="opacity-0 group-hover:opacity-100 text-xs text-red-400/50 hover:text-red-400 transition-all duration-300 shrink-0"
                   >
                     删除
                   </button>

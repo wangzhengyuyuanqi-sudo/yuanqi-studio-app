@@ -5,13 +5,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/ui/Button";
 import type { DramaListItem } from "@/types";
 
-const inputClass = "w-full neumorph-inset rounded-2xl px-5 py-3.5 text-sm text-champagne-300/90 placeholder:text-noir-600 focus:outline-none focus:shadow-gold-sm transition-all duration-300";
+const inputClass = "w-full neumorph-inset rounded-2xl px-5 py-3.5 text-sm text-champagne-300/80 placeholder:text-noir-600 focus:outline-none focus:border-gold-500/20 transition-all duration-300";
 
 export default function EpisodeForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const preselectedDramaId = searchParams?.get("dramaId") || "";
-
   const [dramaList, setDramaList] = useState<DramaListItem[]>([]);
   const [episodeNumber, setEpisodeNumber] = useState("1");
   const [title, setTitle] = useState("");
@@ -21,18 +20,10 @@ export default function EpisodeForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetch("/api/dramas")
-      .then((r) => r.json())
-      .then((d) => { if (d.success) setDramaList(d.data); })
-      .catch(() => {});
-  }, []);
+  useEffect(() => { fetch("/api/dramas").then((r) => r.json()).then((d) => { if (d.success) setDramaList(d.data); }).catch(() => {}); }, []);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    if (!title.trim()) { setError("标题不能为空"); return; }
-
+    e.preventDefault(); setError(""); if (!title.trim()) { setError("标题不能为空"); return; }
     setLoading(true);
     const fd = new FormData();
     fd.append("episodeNumber", episodeNumber);
@@ -40,65 +31,20 @@ export default function EpisodeForm() {
     if (summary.trim()) fd.append("summary", summary.trim());
     if (dramaId) fd.append("dramaId", dramaId);
     if (file) fd.append("script", file);
-
-    try {
-      const res = await fetch("/api/episodes", { method: "POST", body: fd });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.error);
-      router.push(`/episodes/${data.data.id}`);
-      router.refresh();
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "创建失败");
-    } finally {
-      setLoading(false);
-    }
+    try { const res = await fetch("/api/episodes", { method: "POST", body: fd }); const data = await res.json(); if (!data.success) throw new Error(data.error); router.push(`/episodes/${data.data.id}`); router.refresh(); } catch (err: unknown) { setError(err instanceof Error ? err.message : "创建失败"); } finally { setLoading(false); }
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5 max-w-lg">
-      {error && (
-        <div className="text-sm text-red-400 bg-red-500/8 border border-red-500/15 px-4 py-3 rounded-2xl">
-          {error}
-        </div>
-      )}
-
-      <div>
-        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">集号</label>
-        <input type="number" value={episodeNumber} onChange={(e) => setEpisodeNumber(e.target.value)} min="1" className={inputClass} />
-      </div>
-
-      <div>
-        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">标题</label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputClass} placeholder="如：第一集 · 初遇" />
-      </div>
-
-      <div>
-        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">摘要</label>
-        <textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="可选" />
-      </div>
-
-      <div>
-        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">所属剧集</label>
-        <select value={dramaId} onChange={(e) => setDramaId(e.target.value)} className={inputClass}>
-          <option value="" className="bg-[#101018]">无</option>
-          {dramaList.map((d) => (
-            <option key={d.id} value={d.id} className="bg-[#101018]">{d.title}</option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">上传剧本（可选）</label>
-        <input type="file" accept=".pdf,.docx,.doc,.txt" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full text-sm text-noir-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-medium file:bg-white/[0.04] file:text-noir-300 hover:file:bg-white/[0.08] file:transition-colors file:cursor-pointer" />
-      </div>
-
+      {error && <div className="text-sm text-red-400/80 bg-red-500/5 border border-red-500/10 px-4 py-3 rounded-2xl">{error}</div>}
+      <div><label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">集号</label><input type="number" value={episodeNumber} onChange={(e) => setEpisodeNumber(e.target.value)} min="1" className={inputClass} /></div>
+      <div><label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">标题</label><input value={title} onChange={(e) => setTitle(e.target.value)} className={inputClass} placeholder="如：第一集 · 初遇" /></div>
+      <div><label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">摘要</label><textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="可选" /></div>
+      <div><label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">所属剧集</label><select value={dramaId} onChange={(e) => setDramaId(e.target.value)} className={inputClass}><option value="" className="bg-[#0a0812]">无</option>{dramaList.map((d) => (<option key={d.id} value={d.id} className="bg-[#0a0812]">{d.title}</option>))}</select></div>
+      <div><label className="block text-sm font-bold text-champagne-300/70 mb-2 tracking-wide">上传剧本（可选）</label><input type="file" accept=".pdf,.docx,.doc,.txt" onChange={(e) => setFile(e.target.files?.[0] || null)} className="w-full text-sm text-noir-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-medium file:bg-white/[0.04] file:text-noir-300 hover:file:bg-white/[0.08] file:transition-colors file:cursor-pointer" /></div>
       <div className="flex gap-3 pt-2">
-        <Button type="submit" disabled={loading}>
-          {loading ? "创建中..." : "创建集数"}
-        </Button>
-        <Button type="button" variant="secondary" onClick={() => router.back()}>
-          取消
-        </Button>
+        <Button type="submit" disabled={loading}>{loading ? "创建中..." : "创建集数"}</Button>
+        <Button type="button" variant="secondary" onClick={() => router.back()}>取消</Button>
       </div>
     </form>
   );
