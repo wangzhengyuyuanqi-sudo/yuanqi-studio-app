@@ -5,6 +5,12 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return NextResponse.json(
+        { error: "BLOB_READ_WRITE_TOKEN 未配置，请在 Vercel Settings → Environment Variables 中添加并 Redeploy" },
+        { status: 500 }
+      );
+    }
     const jsonResponse = await handleUpload({
       body: await request.json(),
       request,
