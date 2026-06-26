@@ -1,38 +1,32 @@
-import { handleUpload } from "@vercel/blob/client";
+import { put } from "@vercel/blob";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
-    if (!process.env.BLOB_READ_WRITE_TOKEN) {
-      return NextResponse.json(
-        { error: "BLOB_READ_WRITE_TOKEN 未配置，请在 Vercel Settings → Environment Variables 中添加并 Redeploy" },
-        { status: 500 }
-      );
-    }
-    const jsonResponse = await handleUpload({
-      body: await request.json(),
-      request,
-      onBeforeGenerateToken: async () => {
-        return {
-          allowedContentTypes: [
-            "image/jpeg", "image/png", "image/webp", "image/gif",
-            "application/pdf", "text/plain",
-            "application/msword",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-          ],
-          maximumSizeInBytes: 25 * 1024 * 1024,
-        };
-      },
-      onUploadCompleted: async () => {},
-    });
+    const fd = await request.formData();
+    const file = fd.get("file") as File | null;
 
-    return NextResponse.json(jsonResponse);
+    if (!file || file.size === 0) {
+      return NextResponse.json({ success: false, error: "未收到文件" }, { status: 400 });
+    }
+
+    const prefix = fd.get("prefix") as string || "uploads";
+    const ext = file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".")) : ".bin";
+    const safeName = `${prefix}/${Date.now()}_${Math.random().toString(36).slice(2, 10)}${ext}`;
+
+    const blob = await put(safeName, file, { access: "public" });
+
+    return NextResponse.json({
+      success: true,
+      url: blob.url,
+      name: file.name,
+    });
   } catch (error) {
-    console.error("upload-blob error:", error);
+    console.error("upload error:", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "上传服务异常" },
+      { success: false, error: error instanceof Error ? error.message : "上传失败" },
       { status: 500 }
     );
   }
