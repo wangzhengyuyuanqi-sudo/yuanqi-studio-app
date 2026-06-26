@@ -56,7 +56,7 @@ export default function DramaDetailPage() {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <div className="flex items-center justify-center flex-1 flex-col gap-5">
+        <div className="flex items-center justify-center flex-1 flex-col gap-5 px-4">
           <p className="text-red-400 text-base">剧集不存在</p>
           <Link href="/dramas" className="text-gold-400 hover:text-gold-300 text-sm transition-colors">返回剧集列表</Link>
         </div>
@@ -67,7 +67,7 @@ export default function DramaDetailPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-8 py-10">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-8 py-6 sm:py-10">
         <div className="animate-reveal-up">
           <Link href="/dramas" className="inline-flex items-center gap-2 text-sm text-noir-400 hover:text-champagne-300 transition-colors duration-300 px-3 py-1.5 -ml-3 rounded-lg hover:bg-[#1e1e2e]/40 font-medium">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -81,23 +81,23 @@ export default function DramaDetailPage() {
           </div>
         ) : drama ? (
           <>
-            <div className="mb-10 mt-4 animate-reveal-up stagger-1">
-              <div className="flex items-end justify-between">
+            <div className="mb-6 sm:mb-10 mt-4 animate-reveal-up stagger-1">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-0">
                 <div>
                   <p className="text-noir-500 text-2xs tracking-[0.18em] uppercase mb-2">Drama</p>
-                  <h1 className="text-3xl font-extrabold text-champagne-300 tracking-tight">{drama.title}</h1>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold text-champagne-300 tracking-tight">{drama.title}</h1>
                   {drama.description && (
-                    <p className="text-noir-400 text-base mt-3 max-w-lg leading-relaxed">{drama.description}</p>
+                    <p className="text-noir-400 text-sm sm:text-base mt-3 max-w-lg leading-relaxed">{drama.description}</p>
                   )}
                 </div>
-                <span className="text-noir-500 text-base font-mono tabular-nums">
+                <span className="text-sm sm:text-base text-noir-500 font-mono tabular-nums">
                   {drama._count.episodes} 集
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-champagne-300/80 font-bold text-base tracking-wide">集数列表</h2>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
+              <h2 className="text-champagne-300/80 font-bold text-sm sm:text-base tracking-wide">集数列表</h2>
               <div className="flex items-center gap-3">
                 {drama.episodes.length > 0 && (
                   <Button variant="ghost" size="sm" onClick={handleExport} disabled={exporting}>
@@ -115,7 +115,7 @@ export default function DramaDetailPage() {
 
             {drama.episodes.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-24 animate-reveal-up">
-                <div className="w-16 h-16 rounded-2xl neumorph-inset flex items-center justify-center mb-4">
+                <div className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl neumorph-inset flex items-center justify-center mb-4">
                   <svg className="w-6 h-6 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>

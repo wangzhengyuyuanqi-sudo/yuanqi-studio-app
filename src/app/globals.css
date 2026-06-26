@@ -136,3 +136,19 @@ html { font-size: 17px; }
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
 }
+
+/* ===== Mobile: sm breakpoint auto-shrink neumorph shadows ===== */
+@media (max-width: 640px) {
+  .neumorph-raised {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45),
+                -3px -3px 8px rgba(255, 255, 255, 0.02);
+  }
+  .neumorph-raised:hover {
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5),
+                -3px -3px 10px rgba(255, 255, 255, 0.03);
+  }
+  .neumorph-gold-raised {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.45),
+                -2px -2px 8px rgba(212, 175, 55, 0.15);
+  }
+}

@@ -62,11 +62,11 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-4xl mx-auto w-full px-8 py-10">
-        <div className="flex items-end justify-between mb-10 animate-reveal-up">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-8 py-6 sm:py-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-0 mb-6 sm:mb-10 animate-reveal-up">
           <div>
             <p className="text-noir-500 text-2xs tracking-[0.18em] uppercase mb-2">Browse</p>
-            <h1 className="text-3xl font-extrabold text-champagne-300 tracking-tight">剧集列表</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-champagne-300 tracking-tight">剧集列表</h1>
           </div>
           <div className="flex items-center gap-3">
             {dramaList.length > 0 && (
@@ -87,8 +87,8 @@ export default function DashboardPage() {
           </div>
         ) : dramaList.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-28 animate-reveal-up">
-            <div className="w-20 h-20 rounded-3xl neumorph-inset flex items-center justify-center mb-6">
-              <svg className="w-9 h-9 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-3xl neumorph-inset flex items-center justify-center mb-6">
+              <svg className="w-8 sm:w-9 h-8 sm:h-9 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
               </svg>
             </div>
@@ -101,23 +101,23 @@ export default function DashboardPage() {
             {dramaList.map((d, i) => (
               <div
                 key={d.id}
-                className="flex items-center gap-5 px-6 py-5 neumorph-raised rounded-2xl transition-all duration-500 group animate-reveal-up cursor-pointer"
+                className="flex items-center gap-4 sm:gap-5 px-4 sm:px-6 py-4 sm:py-5 neumorph-raised rounded-2xl transition-all duration-500 group animate-reveal-up cursor-pointer"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="w-2 h-2 rounded-full bg-gold-500/70 group-hover:bg-gold-400 group-hover:shadow-gold-sm transition-all duration-500 shrink-0" />
 
                 <Link href={`/dramas/${d.id}`} className="flex-1 min-w-0">
-                  <h3 className="text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">
+                  <h3 className="text-sm sm:text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">
                     {d.title}
                   </h3>
                   {d.description && (
-                    <p className="text-sm text-noir-500 line-clamp-1 mt-1.5 group-hover:text-noir-400 transition-colors">
+                    <p className="text-xs sm:text-sm text-noir-500 line-clamp-1 mt-1.5 group-hover:text-noir-400 transition-colors">
                       {d.description}
                     </p>
                   )}
                 </Link>
 
-                <span className="text-sm text-noir-500 shrink-0 font-mono tabular-nums">
+                <span className="text-xs sm:text-sm text-noir-500 shrink-0 font-mono tabular-nums">
                   {d._count.episodes} 集
                 </span>
 

@@ -7,39 +7,39 @@ export default function Home() {
   const { setMode } = useMode();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 relative overflow-hidden">
 
       {/* ---- HERO ---- */}
-      <section className="flex flex-col items-center text-center gap-16 max-w-2xl mx-auto">
+      <section className="flex flex-col items-center text-center gap-10 sm:gap-16 max-w-2xl mx-auto">
 
         {/* Brand */}
-        <div className="space-y-10 animate-reveal-up">
-          <h1 className="text-7xl sm:text-8xl font-bold text-champagne-300 tracking-[0.06em] leading-none font-heading">
+        <div className="space-y-8 sm:space-y-10 animate-reveal-up">
+          <h1 className="text-5xl sm:text-7xl font-bold text-champagne-300 tracking-[0.06em] leading-none font-heading">
             元气制片
           </h1>
 
-          <div className="flex items-center gap-5 justify-center">
-            <div className="h-px w-12 bg-gold-500/30" />
-            <span className="text-xs tracking-[0.3em] text-noir-500 font-mono uppercase">
+          <div className="flex items-center gap-3 sm:gap-5 justify-center">
+            <div className="h-px w-8 sm:w-12 bg-gold-500/30" />
+            <span className="text-2xs sm:text-xs tracking-[0.3em] text-noir-500 font-mono uppercase">
               Studio
             </span>
-            <div className="h-px w-12 bg-gold-500/30" />
+            <div className="h-px w-8 sm:w-12 bg-gold-500/30" />
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-noir-400/80 text-lg leading-loose tracking-[0.12em] max-w-md font-light animate-reveal-up stagger-2">
+        <p className="text-noir-400/80 text-base sm:text-lg leading-loose tracking-[0.12em] max-w-md font-light animate-reveal-up stagger-2 px-4">
           短剧视觉资产统一管理平台
           <br />
           剧本 · 人物 · 场景 · 道具
         </p>
 
         {/* CTA */}
-        <div className="flex flex-col sm:flex-row gap-5 animate-reveal-up stagger-3">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 animate-reveal-up stagger-3 w-full sm:w-auto px-4 sm:px-0">
           <Link
             href="/dashboard"
             onClick={() => setMode("edit")}
-            className="px-12 py-5 rounded-2xl neumorph-gold-raised text-[#0c0b08] font-bold text-base tracking-[0.18em] text-center transition-all duration-600 hover:shadow-gold-glow-lg active:scale-[0.97]"
+            className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl neumorph-gold-raised text-[#0c0b08] font-bold text-sm sm:text-base tracking-[0.18em] text-center transition-all duration-600 hover:shadow-gold-glow-lg active:scale-[0.97]"
           >
             导演编辑端
           </Link>
@@ -47,7 +47,7 @@ export default function Home() {
           <Link
             href="/dashboard"
             onClick={() => setMode("preview")}
-            className="px-12 py-5 rounded-2xl neumorph-raised text-champagne-300 font-semibold text-base tracking-[0.18em] text-center border-gold-500/10 transition-all duration-600 hover:shadow-gold-glow hover:border-gold-500/25 active:scale-[0.97]"
+            className="px-8 sm:px-12 py-4 sm:py-5 rounded-2xl neumorph-raised text-champagne-300 font-semibold text-sm sm:text-base tracking-[0.18em] text-center border-gold-500/10 transition-all duration-600 hover:shadow-gold-glow hover:border-gold-500/25 active:scale-[0.97]"
           >
             团队预览端
           </Link>
@@ -63,8 +63,8 @@ export default function Home() {
       </section>
 
       {/* ---- SIGNATURE ---- */}
-      <div className="absolute bottom-8 right-10 z-10">
-        <span className="font-script text-xl text-champagne-300/12 hover:text-gold-400/25 transition-all duration-700 select-none tracking-wider">
+      <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-10 z-10">
+        <span className="font-script text-lg sm:text-xl text-champagne-300/12 hover:text-gold-400/25 transition-all duration-700 select-none tracking-wider">
           by WangZhengYu
         </span>
       </div>

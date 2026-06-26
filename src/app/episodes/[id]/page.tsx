@@ -123,26 +123,26 @@ export default function EpisodeDetailPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 max-w-5xl mx-auto w-full px-8 py-10">
-        <Link href={backUrl} className="inline-flex items-center gap-2 text-sm text-noir-400 hover:text-champagne-300 transition-colors duration-300 mb-6 px-3 py-1.5 -ml-3 rounded-lg hover:bg-[#1e1e2e]/40 font-medium">
+      <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-8 py-6 sm:py-10">
+        <Link href={backUrl} className="inline-flex items-center gap-2 text-sm text-noir-400 hover:text-champagne-300 transition-colors duration-300 mb-4 sm:mb-6 px-3 py-1.5 -ml-3 rounded-lg hover:bg-[#1e1e2e]/40 font-medium">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           {backLabel}
         </Link>
 
-        <div className="mb-8 animate-reveal-up">
-          <div className="flex items-center gap-3 mb-1">
+        <div className="mb-6 sm:mb-8 animate-reveal-up">
+          <div className="flex flex-wrap items-center gap-3 mb-1">
             <p className="text-noir-500 text-2xs tracking-[0.18em] uppercase">Episode</p>
             <span className="px-3 py-1 rounded-lg neumorph-inset text-gold-400 text-2xs font-bold font-mono">
               第 {episode.episodeNumber} 集
             </span>
           </div>
-          <h1 className="text-3xl font-extrabold text-champagne-300 tracking-tight mt-2">{episode.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-champagne-300 tracking-tight mt-2">{episode.title}</h1>
           {episode.summary && (
-            <p className="text-noir-400 text-base mt-3 max-w-2xl leading-relaxed">{episode.summary}</p>
+            <p className="text-noir-400 text-sm sm:text-base mt-3 max-w-2xl leading-relaxed">{episode.summary}</p>
           )}
 
           {episode.scriptPath && (
-            <div className="mt-5 inline-flex items-center gap-3 px-5 py-3 rounded-2xl neumorph-raised">
+            <div className="mt-5 inline-flex flex-wrap items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl neumorph-raised">
               <svg className="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
               <span className="text-sm text-noir-300 font-medium">{episode.scriptName}</span>
               <a href={episode.scriptPath} target="_blank" rel="noopener noreferrer" className="text-sm text-gold-400 hover:text-gold-300 transition-colors ml-auto">
@@ -224,8 +224,8 @@ function AssetPreviewDetail({ asset }: { asset: AssetItem }) {
     <div className="space-y-5">
       {hasFile ? (
         isScript ? (
-          <div className="rounded-2xl neumorph-inset p-10 flex flex-col items-center gap-5">
-            <svg className="w-20 h-20 text-gold-400/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="rounded-2xl neumorph-inset p-8 sm:p-10 flex flex-col items-center gap-5">
+            <svg className="w-16 sm:w-20 h-16 sm:h-20 text-gold-400/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <p className="text-noir-300 text-base font-medium">{asset.imageName || "剧本文件"}</p>
@@ -242,7 +242,7 @@ function AssetPreviewDetail({ asset }: { asset: AssetItem }) {
               alt={asset.name}
               className="w-full max-h-[55vh] object-contain bg-[#0c0b08]"
             />
-            <div className="px-5 py-4 flex items-center justify-between bg-gradient-to-t from-[#0c0b08]/80">
+            <div className="px-4 sm:px-5 py-4 flex items-center justify-between bg-gradient-to-t from-[#0c0b08]/80">
               <span className="text-sm text-noir-400 truncate max-w-[60%]">{asset.imageName}</span>
               <Button size="sm" variant="secondary" onClick={handleDownload}>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
@@ -326,13 +326,13 @@ function SectionAccordion({
         tabIndex={0}
         onClick={onToggle}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(); } }}
-        className={`w-full flex items-center gap-4 px-6 py-5 text-left transition-all duration-700 cursor-pointer ${isExpanded ? "bg-[#14141c]/30" : "hover:bg-[#14141c]/15"}`}
+        className={`w-full flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-5 text-left transition-all duration-700 cursor-pointer ${isExpanded ? "bg-[#14141c]/30" : "hover:bg-[#14141c]/15"}`}
       >
-        <span className="text-xl shrink-0">{section.icon}</span>
+        <span className="text-lg sm:text-xl shrink-0">{section.icon}</span>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-3">
-            <h2 className="text-lg font-extrabold text-champagne-300 tracking-wide">{section.label}</h2>
-            <span className={`px-2.5 py-1 text-xs font-bold rounded-full border ${textClass} ${bgClass} ${borderClass}`}>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <h2 className="text-base sm:text-lg font-extrabold text-champagne-300 tracking-wide">{section.label}</h2>
+            <span className={`px-2 sm:px-2.5 py-0.5 sm:py-1 text-xs font-bold rounded-full border ${textClass} ${bgClass} ${borderClass}`}>
               {section.count}
             </span>
           </div>
@@ -341,27 +341,27 @@ function SectionAccordion({
         {isEdit && (
           <button
             onClick={(e) => { e.stopPropagation(); onAdd(); }}
-            className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl neumorph-inset text-noir-400 hover:text-champagne-300 transition-all duration-300 hover:shadow-gold-sm active:scale-[0.97]"
+            className="shrink-0 flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-bold rounded-xl neumorph-inset text-noir-400 hover:text-champagne-300 transition-all duration-300 hover:shadow-gold-sm active:scale-[0.97]"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" /></svg>
-            添加
+            <span className="hidden sm:inline">添加</span>
           </button>
         )}
 
-        <svg className={`w-5 h-5 text-noir-500 shrink-0 transition-transform duration-700 ${isExpanded ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+        <svg className={`w-4 sm:w-5 h-4 sm:h-5 text-noir-500 shrink-0 transition-transform duration-700 ${isExpanded ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
       </div>
 
       <div
         className="transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden"
         style={{ maxHeight: isExpanded ? `${contentHeight}px` : "0px", opacity: isExpanded ? 1 : 0 }}
       >
-        <div ref={contentRef} className="px-6 pb-6 pt-1">
+        <div ref={contentRef} className="px-4 sm:px-6 pb-4 sm:pb-6 pt-1">
           {section.count === 0 ? (
-            <div className="flex flex-col items-center justify-center py-14 text-center">
-              <div className="w-12 h-12 rounded-2xl neumorph-inset flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+            <div className="flex flex-col items-center justify-center py-10 sm:py-14 text-center">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-2xl neumorph-inset flex items-center justify-center mb-4">
+                <svg className="w-5 sm:w-6 h-5 sm:h-6 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
               </div>
-              <p className="text-noir-500 text-base mb-4">{isEdit ? "此分类暂无资产" : "暂无资产"}</p>
+              <p className="text-noir-500 text-sm sm:text-base mb-4">{isEdit ? "此分类暂无资产" : "暂无资产"}</p>
               {isEdit && (
                 <Button variant="ghost" size="sm" onClick={onAdd}>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
@@ -402,26 +402,26 @@ function AssetListRow({
 
   return (
     <div
-      className={`flex items-center gap-4 py-4 first:pt-2 last:pb-2 group rounded-xl px-3 -mx-3 transition-all duration-300 animate-reveal-up ${
+      className={`flex items-center gap-3 sm:gap-4 py-3 sm:py-4 first:pt-2 last:pb-2 group rounded-xl px-2 sm:px-3 -mx-2 sm:-mx-3 transition-all duration-300 animate-reveal-up ${
         !isEdit ? "cursor-pointer hover:bg-[#1e1e2e]/30" : "hover:bg-[#1e1e2e]/20"
       }`}
       style={{ animationDelay: `${idx * 40}ms` }}
       onClick={() => { if (!isEdit && onPreview) onPreview(asset); }}
     >
       {isScript ? (
-        <div className="w-14 h-14 rounded-2xl neumorph-inset flex items-center justify-center shrink-0">
-          <svg className="w-6 h-6 text-gold-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl neumorph-inset flex items-center justify-center shrink-0">
+          <svg className="w-5 sm:w-6 h-5 sm:h-6 text-gold-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
       ) : asset.imagePath ? (
-        <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 neumorph-inset">
+        <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl overflow-hidden shrink-0 neumorph-inset">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={asset.imagePath} alt={asset.name} className="w-full h-full object-cover" loading="lazy" />
         </div>
       ) : (
-        <div className="w-14 h-14 rounded-2xl neumorph-inset flex items-center justify-center shrink-0">
-          <svg className="w-6 h-6 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl neumorph-inset flex items-center justify-center shrink-0">
+          <svg className="w-5 sm:w-6 h-5 sm:h-6 text-noir-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
         </div>
@@ -429,14 +429,14 @@ function AssetListRow({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2.5">
-          <h4 className="text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">{asset.name}</h4>
+          <h4 className="text-sm sm:text-base font-bold text-champagne-300 group-hover:text-gold-300 transition-colors duration-300">{asset.name}</h4>
           <span className="text-xs text-noir-500">{ASSET_TYPE_LABELS[asset.type]}</span>
           {hasFile && !isEdit && (
             <svg className="w-4 h-4 text-noir-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           )}
         </div>
         {asset.description && (
-          <p className="text-sm text-noir-500 line-clamp-1 mt-1">{asset.description}</p>
+          <p className="text-xs sm:text-sm text-noir-500 line-clamp-1 mt-1">{asset.description}</p>
         )}
         {asset.tags && (
           <div className="flex flex-wrap gap-1.5 mt-2">
