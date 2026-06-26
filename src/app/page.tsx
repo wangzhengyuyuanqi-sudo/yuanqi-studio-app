@@ -8,19 +8,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 relative overflow-hidden bg-gradient-to-b from-[#08080c] via-[#0c0b08] to-[#08080c]">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gold-500/[0.03] blur-[140px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-gold-700/[0.03] blur-[120px]" />
-        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-bronze-400/[0.03] blur-[100px]" />
-      </div>
-
       <div className="relative z-10 flex flex-col items-center gap-12 max-w-lg mx-auto w-full">
         <div className="text-center space-y-4 animate-reveal-up">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full neumorph-inset text-2xs tracking-[0.22em] uppercase text-gold-500/70 mb-2">
             <span className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse" />
             Production Studio
           </div>
-          <h1 className="text-5xl sm:text-6xl font-extrabold text-champagne-300 tracking-tighter leading-none">
+          <h1 className="text-6xl sm:text-7xl font-extrabold text-champagne-300 tracking-tighter leading-none font-heading">
             元气制片
           </h1>
           <p className="text-noir-400 text-base max-w-xs mx-auto leading-relaxed font-light tracking-wide">
@@ -53,6 +47,13 @@ export default function Home() {
         <p className="text-2xs text-noir-500 tracking-[0.3em] uppercase animate-reveal-fade stagger-4">
           DRAMA · ASSET · WORKFLOW
         </p>
+      </div>
+
+      {/* Signature */}
+      <div className="absolute bottom-8 right-10 z-10">
+        <span className="font-script text-xl text-champagne-300/20 hover:text-gold-400/30 transition-all duration-700 select-none tracking-wider">
+          by WangZhengYu
+        </span>
       </div>
     </div>
   );

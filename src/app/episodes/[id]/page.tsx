@@ -124,8 +124,8 @@ export default function EpisodeDetailPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 max-w-5xl mx-auto w-full px-8 py-10">
-        <Link href={backUrl} className="inline-flex items-center gap-2 text-2xs text-noir-500 hover:text-champagne-300 transition-colors duration-300 mb-5">
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+        <Link href={backUrl} className="inline-flex items-center gap-2 text-sm text-noir-400 hover:text-champagne-300 transition-colors duration-300 mb-6 px-3 py-1.5 -ml-3 rounded-lg hover:bg-[#1e1e2e]/40 font-medium">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           {backLabel}
         </Link>
 

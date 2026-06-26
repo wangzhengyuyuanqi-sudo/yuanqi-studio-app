@@ -9,9 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"PingFang SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
-        body: ['"PingFang SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+        display: ['"Playfair Display"', '"PingFang SC"', '"Microsoft YaHei"', 'serif'],
+        body: ['"Noto Serif SC"', '"PingFang SC"', '"Microsoft YaHei"', 'serif'],
         mono: ['"SF Mono"', '"JetBrains Mono"', 'Menlo', 'monospace'],
+        script: ['"Dancing Script"', 'cursive'],
+        heading: ['"Playfair Display"', '"Noto Serif SC"', '"PingFang SC"', 'serif'],
       },
       colors: {
         noir: {
@@ -82,6 +84,7 @@ const config: Config = {
         ambient: "ambient-glow 4s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
         "golden-shimmer": "golden-shimmer 3s ease-in-out infinite",
+        "aurora-drift": "aurora-drift 20s ease-in-out infinite",
       },
       keyframes: {
         "reveal-up": {
@@ -107,6 +110,13 @@ const config: Config = {
         "golden-shimmer": {
           "0%": { backgroundPosition: "-200% center" },
           "100%": { backgroundPosition: "200% center" },
+        },
+        "aurora-drift": {
+          "0%": { opacity: "0.6", transform: "scale(1) translate(0, 0)" },
+          "25%": { opacity: "0.9", transform: "scale(1.08) translate(1%, -0.5%)" },
+          "50%": { opacity: "0.7", transform: "scale(1.02) translate(-0.5%, 1%)" },
+          "75%": { opacity: "1", transform: "scale(1.06) translate(-1%, -0.2%)" },
+          "100%": { opacity: "0.6", transform: "scale(1) translate(0, 0)" },
         },
       },
     },
